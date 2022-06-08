@@ -20,7 +20,6 @@
 </template>
 
 <script> 
-import axios from "axios"
 
 export default {
   data(){
@@ -33,6 +32,7 @@ export default {
     
   },
   name: 'Login',
+  mounted (){console.log(this.$axios)},
   methods:{
     async iniciarSesion()
     {
@@ -41,17 +41,19 @@ export default {
         password: this.user.password
       };
       //Payload es la forma de llamar a los datos de carga
-      await axios.post('http://127.0.0.1:5000/login', payload)
+      await this.$axios.post('login', payload)
       .then(response => {
-        axios.defaults.headers.common['Authotization'] = 'Bearer ' + response.data;
-        this.$router.push('/');
-        console.log(response)
+        if(response.status == 200){
+          this.$axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
+          localStorage.setItem('username', response.data.user)
+          localStorage.setItem('token', response.data.token)
+          localStorage.setItem('id_user', response.data.id_user)
+          this.$router.push('/');
+          console.log(response)
+        }else {
+          alert("Usuario o contraseña incorrecta")
+        }
       });
-      //Ver como recibir el msj de error cuando el username o password es incorrecto.
-      // .catch(error => {
-      //   var data = response;
-      //   console.log(data.msg)
-      // })
     }
   }
 

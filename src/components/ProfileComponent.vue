@@ -1,12 +1,15 @@
 <template>
   <div class="perfil">
     <body>
-        <ul>
-            <li>Nombre</li>
-            <li>Usuario</li>
-            <li>Peliculas cargadas</li>
-        </ul>
+        <h3>
+        ESTE ES EL PERFIL DE {{name_user }}
+        </h3>
+        <h3>    
+        Peliculas cargadas
+        </h3>
+        <ListMyMovies/>
         <SaveComponent/>
+        
     </body>
         
 
@@ -15,11 +18,29 @@
 
 <script> 
 import SaveComponent from "@/components/Movies/SaveComponent.vue"
+import ListMyMovies from "@/components/Movies/ListMyMovies.vue"
+
 export default {
   name: 'ProfileComponent',
   component:{
     SaveComponent,
-  } 
+    ListMyMovies
+    
+  },
+  methods: {
+    getNameUser(){
+      this.name_user = localStorage.getItem('username')
+    },
+    
+  },
+  mounted(){
+    this.getNameUser()
+  },
+  data(){
+    return{
+      name_user:""
+    }
+  }
 }
 </script>
 

@@ -1,7 +1,13 @@
 <template>
   <div class="home">
-    
-  <ListComponent/>
+    <main>
+      <div class="subtitulo">
+        <h1>Recomendaciones</h1>
+      </div>
+      
+    <ListComponent/>
+    </main>
+
   
   </div>
 </template>
@@ -14,14 +20,23 @@ export default {
   name: 'HomeView',
   components: {
     ListComponentns,
-    
   },
-  
 }
 </script>
 
 <style scoped>
-  .home{
+  main .subtitulo h1{
+    color: rgb(0, 0, 0);
+    
+  }
+
+  .subtitulo{
     display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  template{
+    height: 100%;
   }
 </style>
