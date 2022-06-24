@@ -11,5 +11,7 @@ export default {
   components: {
     DetalleComponent,
   },
+
+  
 }
 </script>

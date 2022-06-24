@@ -146,7 +146,7 @@ export default {
     methods:{
         async getMovie(){
             try {
-                const response = await this.axios.get('http://127.0.0.1:5000/movies');
+                const response = await this.axios.get('http://127.0.0.1:5000/movies', { headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`} });
                 console.log(response)
                 console.log(response.data)
                 this.movies = response.data

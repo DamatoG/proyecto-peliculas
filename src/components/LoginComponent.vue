@@ -53,7 +53,7 @@ export default {
         }else {
           alert("Usuario o contraseña incorrecta")
         }
-      });
+      })
     }
   }
 

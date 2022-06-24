@@ -3,7 +3,7 @@
 <div class="listado">
     
 
-   <CardComponent v-for="m in movies" 
+  <CardComponent v-for="m in movies" 
    key="m.id_movie" 
    :name= "m.name_movie" 
    :sinopsis="m.sinopsis"
@@ -12,9 +12,11 @@
    :img= "m.url_img" 
    :genero="m.genero"
    :id_movie="m.id_movie"
-   
-   
+   :profile="true"
+   :edit="false"
    />
+
+   
 </div>
 <router-view/>
     
@@ -29,7 +31,6 @@ export default {
     data() {
         return{
              movies:[
-                
             ],
             
         };
@@ -41,7 +42,7 @@ export default {
     methods:{
         async getMovie(){
             try {
-                const response = await this.axios.get('http://127.0.0.1:5000/movie_by_user/' + localStorage.getItem('id_user'));
+                const response = await this.axios.get('http://127.0.0.1:5000/movie_by_user/' + localStorage.getItem('id_user'), { headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`} });
                 console.log(response)
                 console.log(response.data)
                 this.movies = response.data
@@ -50,8 +51,6 @@ export default {
                 console.log(err);
             }
         },
-
-        
     },
 
     mounted(){

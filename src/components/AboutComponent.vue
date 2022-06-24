@@ -2,7 +2,12 @@
   <div class="sobre">
     <p>Esta es la pagina de about</p>
     {{ msg }}
-  </div>
+
+
+  
+        
+    
+    </div>
 </template>
 
 <script> 

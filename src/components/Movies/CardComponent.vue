@@ -1,6 +1,6 @@
-><template>
+<template>
 
-    <div class="card d-flex position-relative" style="width: 250px; height:530px" >
+    <div class="card d-flex position-relative " style="width: 250px; max-height:600px" >
         <div class="imgagen">
             <img :src="img" class="card-img-top" alt="..." style="width: 100px; height:200px">
         </div>
@@ -10,10 +10,12 @@
             <p class="card-title">Director: {{ director }}</p>
             <p class="card-title">Fecha estreno: {{ fecha_estreno }}</p>
             <p class="card-title">Genero: {{ genero }}</p>
-            <router-link :to=" { name: 'detalle', params: {idMovie: id_movie}}"><button type="button" class="btn btn-dark">Ver mas</button> 
-            </router-link>
-            
-
+            <div class="d-flex justify-content-between ">
+                <router-link :to=" { name: 'detalle', params: {idMovie: id_movie}}"><button type="button" class="btn btn-dark">Ver mas</button> 
+                </router-link>
+                <button v-if="profile" type="button" class="btn btn-dark" >Editar</button>
+                <button v-if="profile" type="button" class="btn btn-dark" @click="delete">Eliminar</button>
+            </div>
         </div>
         
     </div>
@@ -33,6 +35,8 @@ export default {
         
     }},
     props:{
+        edit:false,
+        profile: false,
         name: String,
         img: String,
         sinopsis:String,
@@ -40,7 +44,12 @@ export default {
         director:String,
         fecha_estreno: String,
         id_movie:Number
-    }}
+    },
+    methods:{
+        delete: function(){
+            console.log("eliminar")
+        }}
+    }
     
 
 </script>
