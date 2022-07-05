@@ -11,6 +11,7 @@ import SaveComponent from '@/components/Movies/SaveComponent'
 import DetalleComponent from '@/components/DetalleComponent.vue'
 import CardComponent from '@/components/Movies/CardComponent.vue'
 import ListMyMovies from '@/components/Movies/ListMyMovies.vue'
+import EditComponent from '@/components/EditComponent.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import VueAxios from 'vue-axios'
@@ -35,6 +36,7 @@ app.config.globalProperties.$axios = { ...axiosInstance }
 
 app.use(router)
 app.component('AboutComponent', AboutComponent)
+app.component('EditComponent', EditComponent)
 app.component('HelloWorld', HelloWorld);
 app.component('ProfileComponent', ProfileComponent);
 app.component('LoginComponent', LoginComponent);

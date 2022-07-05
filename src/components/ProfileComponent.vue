@@ -1,15 +1,15 @@
 <template>
-  <div class="perfil">
+  <div class="perfil container">
     <body>
         <h3>
-        ESTE ES EL PERFIL DE {{name_user }}
+        Este es el perfil de {{ name_user }}
         </h3>
 
         <!--Listo las peliculas segun id_user  -->
 
         <div class="listado">
         
-          <div class="card d-flex position-relative" v-for="m in movies" key="m.id_movie" style="width: 250px; max-height:600px" >
+          <div class="card d-flex position-relative" v-for="m in movies" v-bind:key="m.id_movie" style="width: 250px; max-height:600px" >
             <div class="imgagen">
                 <img :src="m.url_img" class="card-img-top" alt="..." style="width: 100px; height:200px">
             </div>
@@ -22,7 +22,9 @@
                 <div class="d-flex justify-content-between ">
                     <router-link :to=" { name: 'detalle', params: {idMovie: m.id_movie}}"><button type="button" class="btn btn-dark">Ver mas</button> 
                     </router-link>
-                    <button type="button" class="btn btn-dark" @click="editarMovie">Editar</button>
+                    <router-link :to=" { name: 'edit', params: {idMovie: m.id_movie}}"><button type="button" class="btn btn-dark">Editar</button> 
+                    </router-link>
+                    <!-- <button type="button" class="btn btn-dark" @click="editarMovie">Editar</button> -->
                     <button type="button" class="btn btn-dark" v-on:click="deleteMovie">Eliminar</button>
                 </div>
             </div>
@@ -32,65 +34,68 @@
 
         <!-- Finl listado  -->
 
-        <h3>    
-        Peliculas cargadas
-        </h3>
+        <div class="crearPelicula">
+          <div class="sub-crearPelicula">
+          <h3>    
+          CARGAR NUEVA PELICULA
+          </h3>
+          
+          <!--Formulario para cargar/editar peliculas -->
+          <div class="formulario" >
+              
+              <form @submit="sendForm">
+
+                  <div class="mb-3">
+                      <label class="form-label">Nombre pelicula:</label>
+                      <input class="form-control" type="text" v-model="movie.name_movie">
+                  </div>
+
+                  <div class="mb-3">
+                      <label class="form-label">Director</label>
+                      <select class="form-select" v-model="movie.director">
+                          <option v-for="d in directores" :key="d.id" :value="d.name">
+                              {{ d.name }}
+                          </option>
+                      </select>
+                  </div>
+
+                  <div class="mb-3">
+                      <label class="form-label">Genero</label>
+                      <select class="form-select" v-model="movie.director">
+                          <option  v-for="g in generos" :key="g.id" :value="g.name">
+                              {{ g.name }}
+                          </option>
+                      </select>
+                  </div>
+
+                  <div class="mb-3">
+                      <label class="form-label">Fecha de estreno</label>
+                      <input class="form-control" type="text" v-model="movie.fecha_estreno">
+                  </div>
+
+                  <div class="mb-3">
+                      <label class="form-label">Sinopsis:</label>
+                      <textarea class="form-control" v-model="movie.sinopsis" id="" rows="3"></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                      <label class="form-label">URL Imagen:</label>
+                      <input class="form-control" type="text" v-model="movie.url_img">
+                  </div>
+
+                  <!-- <Boton crear que envia la informacion a la consola> -->
+                  
+                  <button class="btn btn-dark">Crear</button>
+                  
+
+              </form>
+                  
+          
         
-        <!--Formulario para cargar/editar peliculas -->
-        <div class=".container-md w-50 p-" >
-            
-            <form @submit="sendForm">
-
-                <div class="mb-3">
-                    <label class="form-label">Nombre pelicula:</label>
-                    <input class="form-control" type="text" v-model="movie.name_movie">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Director</label>
-                    <select class="form-select" v-model="movie.director">
-                        <option v-for="d in directores" :key="d.id" :value="d.name">
-                            {{ d.name }}
-                        </option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Genero</label>
-                    <select class="form-select" v-model="movie.director">
-                        <option  v-for="g in generos" :key="g.id" :value="g.name">
-                            {{ g.name }}
-                        </option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Fecha de estreno</label>
-                    <input class="form-control" type="text" v-model="movie.fecha_estreno">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Sinopsis:</label>
-                    <textarea class="form-control" v-model="movie.sinopsis" id="" rows="3"></textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">URL Imagen:</label>
-                    <input class="form-control" type="text" v-model="movie.url_img">
-                </div>
-
-                <!-- <Boton crear que envia la informacion a la consola> -->
-                
-                <button class="btn btn-dark">Crear</button>
-                
-
-            </form>
-                
-        
-      
-        </div>
+          </div>
+          </div>
         <!-- Fin seccion formulario -->
-        
+        </div>
     </body>
         
   </div>
@@ -103,8 +108,6 @@ export default {
           return{
             movies:[],
             name_user:"",
-
-            editar:false,
             directores:[],
             generos:[],
             movie:{
@@ -117,16 +120,13 @@ export default {
               genero:"",
               director:""
               },
-            contador: 0}
+            }
         },
     
   name: 'ProfileComponent',
     
   methods:{
-    editarMovie(){
-      console.log("Para editar la pelicula es necesario: 1) Al seleccionar editar, la funcion editMovie debe rellenar los campos del formulario con los ")
-
-    },
+    
     
     deleteMovie: function() {
 
@@ -201,7 +201,7 @@ export default {
   
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .imgagen{
+    .imgagen{
         display: flex;
         justify-content: center;
     }
@@ -230,4 +230,16 @@ export default {
     .button{
         margin-bottom: 5px;
     }
+
+    .crearPelicula{
+      display: flex;
+      flex-flow: row;
+      max-width:80%;
+    }
+  
+    .sub-crearPelicula{
+      width: 100%;
+    }
+
+    
 </style>

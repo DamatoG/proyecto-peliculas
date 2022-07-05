@@ -1,16 +1,28 @@
 <template>
     
     <div class="container">
-        <div class="detalle  bg-light border">
-            <div class="imgagen">
-            <img :src="movie.url_img" style="width: 100px; height:200px">
+        <div class="detalle bg-light border">
+            <div class="imagen">
+                <img :src="movie.url_img" style="width: 200px; height:300px">
             </div>
-            
-            <div class= "Titulo"> {{ movie.name_movie }} </div>
-            <div class="genero"> Genero: {{ movie.genero }}</div>
-            <div class="Director"> Director: {{ movie.director }} </div>
-            <div class="fecha"> Fecha estreno: {{ movie.fecha_estreno }} </div>
-            <div class="sinopsis"> Sinopsis {{ movie.sinopsis }}</div>
+        
+            <div class="contenido" >
+                <div class= "Titulo"> 
+                    <h2>{{ movie.name_movie }}</h2>
+                </div>
+                <div class="genero"> 
+                    <h4> Genero: {{ movie.genero }}</h4>
+                </div>
+                <div class="Director"> 
+                    <h4> Director: {{ movie.director }} </h4>
+                </div>
+                <div class="fecha"> 
+                    <h4> Fecha estreno: {{ movie.fecha_estreno }} </h4>
+                </div>
+                <div class="sinopsis" > 
+                    <h4> Sinopsis: {{ movie.sinopsis }}</h4>
+                </div>
+            </div>
         </div>
 
     
@@ -20,7 +32,8 @@
             
             <h3>Comentarios:</h3>
 
-            <div class="comentario bg-light border" v-for="c in comentarios"> {{ c.body }}</div>
+            <div class="comentario bg-white border" v-for="c in comentarios" v-bind:key="c.id"> {{ c.body }}</div>
+            
         </div>
 
         <form class="nuevoComent bg-light border" >
@@ -115,6 +128,10 @@ export default {
 </script>
 
 <style>
+.imagen{
+    margin-right: 15px;
+}
+
  .container{
     margin-top: 20px;
     padding-top: 20px
@@ -134,4 +151,25 @@ export default {
     padding: 30px;
     
  }
+
+ .comentario{
+    margin-top: 10px;
+    padding: 10px;
+    
+ }
+
+.detalle{
+    display: flex;
+}
+
+@media (max-width: 600px){
+    .detalle{
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+    }
+    }
+
+
+
 </style>

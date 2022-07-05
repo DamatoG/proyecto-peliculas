@@ -1,21 +1,20 @@
 <template>
-  <div class="login">
-    <form @submit.prevent="iniciarSesion">
-      <label for="">Username</label>
-      <br>
-      <input type="text" v-model="user.username" placeholder="Ingrese su nombre de usuario">
-      <br>
-      <label for="">Password</label>
-      <br>
-      <input type="password" v-model="user.password">
-      <br>
+  <div class="border container">
+    <form class="form" @submit.prevent="iniciarSesion">
+      <div class="mb-3">
+          <label class="form-label">USUARIO</label>
+          <input class="form-control" type="text" v-model="user.username" placeholder="Ingrese su nombre de usuario">
+      </div>
 
-      <input type="submit" value="Iniciar sesion">
+      <div class="mb-3">
+          <label class="form-label">CONTRASEÑA</label>
+          <input class="form-control" type="password" v-model="user.password" placeholder="Ingrese su contraseña">
+      </div>
+
+      <button class="btn btn-dark" type="submit">Iniciar sesion</button>
+      
+      <button class="btn btn-dark"><router-link class="link" to='/'>Ingreso sin registro</router-link></button>
     </form>
-    <br>
-    <br>
-    <button><router-link to='/'>Ingreso sin registro</router-link></button>
-
   </div>
 </template>
 
@@ -62,5 +61,25 @@ export default {
 
 
 <style scoped>
+.form{
+  display: flex;
+  flex-flow:column;
+  
+
+}
+.container{
+  max-width: 300px;
+  padding: 10px;
+  height: 100%;
+}
+
+button{
+margin-top: 10px;
+}
+
+a {
+  color: white;
+}
+
 
 </style>

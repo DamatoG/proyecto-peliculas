@@ -5,6 +5,7 @@ import AboutView from '../views/AboutView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import DetalleView from '../views/DetalleView.vue'
 import LoginView from '../views/LoginView.vue'
+import EditView from '../views/EditView'
 
 const routes = [
   {
@@ -35,6 +36,11 @@ const routes = [
     path: '/detalle/:idMovie',
     name: 'detalle',
     component: DetalleView
+  },
+  {
+    path: '/edit/:idMovie',
+    name: 'edit',
+    component: EditView
   },
 ]
 
