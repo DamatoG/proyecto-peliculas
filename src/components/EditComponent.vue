@@ -18,7 +18,7 @@
 
                   <div class="mb-3">
                       <label class="form-label">Genero</label>
-                      <select class="form-select" v-model="movie.director">
+                      <select class="form-select" v-model="movie.genero">
                         <option selected> {{ movie.genero }}  </option>
                           <option  v-for="g in generos" :key="g.id" :value="g.name">
                               {{ g.name }}
@@ -114,6 +114,8 @@ export default {
             try{
                 let res= await this.$axios.put("http://127.0.0.1:5000/movie/" + this.$route.params.idMovie, data, {headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}})
                 console.log("pelicula editada correctamente")
+                // alert("pelicula editada correctamente")
+                this.$router.push('/')
             } catch(error){
                 alert("No se pudo editar la pelicula")
                 console.log('No se puedo editar la pelicula')

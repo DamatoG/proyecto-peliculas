@@ -175,7 +175,11 @@ export default {
         console.log(response.data)
         this.movies = response.data
         return response.data;
-        } catch (err) {console.log(err)}},
+        } catch (err) {
+          console.log(err)
+          alert("Estuviste demaciado tiempo inactivo, volve a iniciar sesion")
+          this.$router.push('/login')
+          }},
 
     getNameUser(){
       this.name_user = localStorage.getItem('username')}

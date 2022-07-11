@@ -42,16 +42,13 @@ export default {
       //Payload es la forma de llamar a los datos de carga
       await this.$axios.post('login', payload)
       .then(response => {
-        if(response.status == 200){
           this.$axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
           localStorage.setItem('username', response.data.user)
           localStorage.setItem('token', response.data.token)
           localStorage.setItem('id_user', response.data.id_user)
           this.$router.push('/');
           console.log(response)
-        }else {
-          alert("Usuario o contraseña incorrecta")
-        }
+  
       })
     }
   }
