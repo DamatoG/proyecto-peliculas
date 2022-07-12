@@ -70,7 +70,7 @@
 
                   <div class="mb-3">
                       <label class="form-label">Fecha de estreno</label>
-                      <input class="form-control" type="text" v-model="movie.fecha_estreno">
+                      <input class="form-control" type="date" v-model="movie.fecha_estreno">
                   </div>
 
                   <div class="mb-3">
@@ -126,7 +126,6 @@ export default {
   name: 'ProfileComponent',
     
   methods:{
-    
     
     deleteMovie: function() {
 

@@ -88,27 +88,22 @@ export default {
             }
             },
         sendComent(e){
-            //e.preventDefault();
+            e.preventDefault();
 
             const coment = {
                 "id_movie": this.$route.params.idMovie,
                 "id_user": localStorage.getItem('id_user'),
                 "body": this.nuevoComentario.body
-
-
             }
 
             this.insert(coment)
+            this.nuevoComentario.body = ""
         },
         async insert(data){
             try{
-            
-                console.log(JSON.stringify(data))
                 let res= await this.$axios.post("/movie/"+ this.$route.params.idMovie+"/comentario", data)
-                console.log("La respuesta del servidor es", res)
-                this.creada = true
+                this.comentarios.push(data)
                 alert("Comentario creado")
-                console.log("La respuesta del servidor es", res)
 
             } catch(error){
                 alert("No se pudo enviar el comentario")

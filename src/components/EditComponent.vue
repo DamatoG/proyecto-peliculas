@@ -1,5 +1,6 @@
 <template>
-    <form @submit="sendForm">
+    <div class="container"> 
+        <form @submit="sendForm">
 
                   <div class="mb-3">
                       <label class="form-label">Nombre pelicula:</label>
@@ -28,7 +29,7 @@
 
                   <div class="mb-3">
                       <label class="form-label">Fecha de estreno</label>
-                      <input class="form-control" type="text" v-model="movie.fecha_estreno">
+                      <input class="form-control" type="date" v-model="movie.fecha_estreno">
                   </div>
 
                   <div class="mb-3">
@@ -44,9 +45,8 @@
                   <!-- <Boton crear que envia la informacion a la consola> -->
                   
                   <button class="btn btn-dark" v-on:click="editMovie">Editar</button>
-                  
-
-              </form>
+        </form>
+    </div>
 </template>
 
 
@@ -105,16 +105,16 @@ export default {
                 return generosFiltrados;
             } catch (err) {console.log(err);}
         },
-        editMovie(){    
+        editMovie(e){    
+            e.preventDefault();
             const movie = this.movie
-
             this.insert(movie)
         },
         async insert(data){
             try{
                 let res= await this.$axios.put("http://127.0.0.1:5000/movie/" + this.$route.params.idMovie, data, {headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}})
                 console.log("pelicula editada correctamente")
-                // alert("pelicula editada correctamente")
+                alert("pelicula editada correctamente")
                 this.$router.push('/')
             } catch(error){
                 alert("No se pudo editar la pelicula")
