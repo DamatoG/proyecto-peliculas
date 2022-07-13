@@ -14,7 +14,7 @@
                 <router-link :to=" { name: 'detalle', params: {idMovie: id_movie}}"><button type="button" class="btn btn-dark">Ver mas</button> 
                 </router-link>
                 <button v-if="profile" type="button" class="btn btn-dark" >Editar</button>
-                <button v-if="profile" type="button" class="btn btn-dark" @click="delete">Eliminar</button>
+                <button v-if="profile" type="button" class="btn btn-dark" >Eliminar</button>
             </div>
         </div>
         

@@ -7,6 +7,7 @@
 
         <!--Listo las peliculas segun id_user  -->
 
+        <h4>PELICULAS CARGADAS</h4>
         <div class="listado">
         
           <div class="card d-flex position-relative" v-for="m in movies" v-bind:key="m.id_movie" style="width: 250px; max-height:600px" >

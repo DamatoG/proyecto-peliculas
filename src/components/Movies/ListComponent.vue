@@ -21,7 +21,7 @@
 
     </div> -->
    <CardComponent  v-for="m in movies" 
-   :key="m.id_movie" 
+   key="m.id_movie" 
    :name= "m.name_movie" 
    :sinopsis="m.sinopsis"
    :fecha_estreno= "m.fecha_estreno" 
@@ -44,17 +44,9 @@ import CardComponentVue from './CardComponent.vue';
 export default {
     data() {
         return{
-             movies:[{
-            "id_movie":"",
-            "id_user":"",
-            "name_movie":"",
-            "fecha_estreno":"",
-            "director":"",
-            "genero":"",
-            "sinopsis":"",
-            "url_img":"",
-            "id_comentarios":[]
-        }]
+             movies:[
+                
+            ]
         };
         
     },
@@ -75,6 +67,15 @@ export default {
 }
     },
     mounted(){
+        // fetch('http://127.0.0.1:5000/movies')
+        // .then((res) => res.json())
+        // .then ((res) => this.movies=res)
+        // console.log(res)
+        //this.getMovie()
+    
+        // this.axios.get('http://127.0.0.1:5000/movies')
+        // .then((res) => res.json())
+        // .then((res) => this.movies=res)
         this.getMovie()
   }
   }
@@ -103,8 +104,7 @@ export default {
     #sinopsis{ overflow: hidden; 
     text-overflow: ellipsis; 
     display: -webkit-box; 
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* number of lines to show */ -webkit-box-orient: vertical;
     }
 
     .card-img-top{
