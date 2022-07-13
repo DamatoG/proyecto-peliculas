@@ -63,7 +63,8 @@ export default {
               id_user: localStorage.getItem('id_user'),
               genero:"",
               director:"",
-              id_movie:""
+              id_movie:"",
+              id_comentarios:[]
              },
               directores:[],
               generos:[]
@@ -76,6 +77,7 @@ export default {
                 const response = await this.axios.get('http://127.0.0.1:5000/movie/'+this.$route.params.idMovie);
                 
                 console.log(response.data)
+                //this.movie = data
                 this.movie.name_movie = response.data.name_movie
                 this.movie.fecha_estreno = response.data.fecha_estreno
                 this.movie.director = response.data.director
@@ -83,6 +85,7 @@ export default {
                 this.movie.url_img = response.data.url_img
                 this.movie.sinopsis = response.data.sinopsis
                 this.movie.id_movie = response.data.id_movie
+                this.movie.id_comentarios = response.data.id_comentarios
 
                 return response.data;
             } catch (err) {console.log(err);}
@@ -106,16 +109,18 @@ export default {
             } catch (err) {console.log(err);}
         },
         editMovie(e){    
-            e.preventDefault();
+            
             const movie = this.movie
             this.insert(movie)
+            this.$router.push('/profile')
+            alert("pelicula editada correctamente")
         },
         async insert(data){
             try{
                 let res= await this.$axios.put("http://127.0.0.1:5000/movie/" + this.$route.params.idMovie, data, {headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}})
                 console.log("pelicula editada correctamente")
-                alert("pelicula editada correctamente")
-                this.$router.push('/')
+                
+                
             } catch(error){
                 alert("No se pudo editar la pelicula")
                 console.log('No se puedo editar la pelicula')

@@ -36,63 +36,63 @@
 
         <div class="crearPelicula">
           <div class="sub-crearPelicula">
-          <h3>    
-          CARGAR NUEVA PELICULA
-          </h3>
+            <h3>    
+            CARGAR NUEVA PELICULA
+            </h3>
+            
+            <!--Formulario para cargar/editar peliculas -->
+            <div class="formulario" >
+                
+                <form @submit="sendForm">
+
+                    <div class="mb-3">
+                        <label class="form-label">Nombre pelicula:</label>
+                        <input class="form-control" type="text" v-model="movie.name_movie">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Director</label>
+                        <select class="form-select" v-model="movie.director">
+                            <option v-for="d in directores" :key="d.id" :value="d.name">
+                                {{ d.name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Genero</label>
+                        <select class="form-select" v-model="movie.director">
+                            <option  v-for="g in generos" :key="g.id" :value="g.name">
+                                {{ g.name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Fecha de estreno</label>
+                        <input class="form-control" type="date" v-model="movie.fecha_estreno">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Sinopsis:</label>
+                        <textarea class="form-control" v-model="movie.sinopsis" id="" rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">URL Imagen:</label>
+                        <input class="form-control" type="text" v-model="movie.url_img">
+                    </div>
+
+                    <!-- <Boton crear que envia la informacion a la consola> -->
+                    
+                    <button class="btn btn-dark">Crear</button>
+                    
+
+                </form>
+                    
+            
           
-          <!--Formulario para cargar/editar peliculas -->
-          <div class="formulario" >
-              
-              <form @submit="sendForm">
-
-                  <div class="mb-3">
-                      <label class="form-label">Nombre pelicula:</label>
-                      <input class="form-control" type="text" v-model="movie.name_movie">
-                  </div>
-
-                  <div class="mb-3">
-                      <label class="form-label">Director</label>
-                      <select class="form-select" v-model="movie.director">
-                          <option v-for="d in directores" :key="d.id" :value="d.name">
-                              {{ d.name }}
-                          </option>
-                      </select>
-                  </div>
-
-                  <div class="mb-3">
-                      <label class="form-label">Genero</label>
-                      <select class="form-select" v-model="movie.director">
-                          <option  v-for="g in generos" :key="g.id" :value="g.name">
-                              {{ g.name }}
-                          </option>
-                      </select>
-                  </div>
-
-                  <div class="mb-3">
-                      <label class="form-label">Fecha de estreno</label>
-                      <input class="form-control" type="date" v-model="movie.fecha_estreno">
-                  </div>
-
-                  <div class="mb-3">
-                      <label class="form-label">Sinopsis:</label>
-                      <textarea class="form-control" v-model="movie.sinopsis" id="" rows="3"></textarea>
-                  </div>
-
-                  <div class="mb-3">
-                      <label class="form-label">URL Imagen:</label>
-                      <input class="form-control" type="text" v-model="movie.url_img">
-                  </div>
-
-                  <!-- <Boton crear que envia la informacion a la consola> -->
-                  
-                  <button class="btn btn-dark">Crear</button>
-                  
-
-              </form>
-                  
-          
-        
-          </div>
+            </div>
           </div>
         <!-- Fin seccion formulario -->
         </div>
@@ -140,7 +140,6 @@ export default {
       //el metodo preventDefault evita recargar la pagina luego de escuchar el evento sendForm
       //ademas ejecuta el metodo async insert que le asigna al objeto data los valores del objeto movie
       e.preventDefault();
-      console.log(this.movie);
 
       const data = {
         "name_movie": this.movie.name_movie,
@@ -151,19 +150,30 @@ export default {
         "url_img": this.movie.url_img,
         "id_user": localStorage.getItem('id_user')
         }             
-        this.insert(data)},
+        this.insert(data),
+        this.movie = {
+              name_movie:"",
+              director:"",
+              url_img:"",
+              sinopsis:"",
+              fecha_estreno:"",
+              id_user: localStorage.getItem('id_user'),
+              genero:"",
+              director:""}
+    },        
 
     async insert(data){
       try{    
-        console.log(JSON.stringify(data))
+        //console.log(JSON.stringify(data))
         let res= await this.$axios.post("/movie", data)
-        console.log("La respuesta del servidor es", res)
-            
+        //console.log("Pelicula creada con exito", res)
+        this.movies.push(data) 
         alert("Pelicula creada con exito")
-        console.log("La respuesta del servidor es", res)
+         
+        
         } catch(error){
             alert("Pelicula no pudo crearse")
-            console.log('No pudo crearse una nueva pelicla')
+            console.log('No pudo crearse una nueva pelicla', error)
         }
         },
 
