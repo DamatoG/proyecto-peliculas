@@ -21,7 +21,7 @@
 
     </div> -->
    <CardComponent  v-for="m in movies" 
-   key="m.id_movie" 
+   :key="m.id_movie" 
    :name= "m.name_movie" 
    :sinopsis="m.sinopsis"
    :fecha_estreno= "m.fecha_estreno" 

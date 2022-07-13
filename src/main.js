@@ -10,7 +10,7 @@ import ListComponent from '@/components/Movies/ListComponent'
 import SaveComponent from '@/components/Movies/SaveComponent'
 import DetalleComponent from '@/components/DetalleComponent.vue'
 import CardComponent from '@/components/Movies/CardComponent.vue'
-import ListMyMovies from '@/components/Movies/ListMyMovies.vue'
+
 import EditComponent from '@/components/EditComponent.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -44,7 +44,7 @@ app.component('ListComponent', ListComponent)
 app.component('SaveComponent', SaveComponent)
 app.component('DetalleComponent', DetalleComponent)
 app.component('CardComponent', CardComponent)
-app.component('ListMyMovies', ListMyMovies)
+
 
 app.mount('#app')
 //use(store)

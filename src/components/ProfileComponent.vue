@@ -25,8 +25,7 @@
                     </router-link>
                     <router-link :to=" { name: 'edit', params: {idMovie: m.id_movie}}"><button type="button" class="btn btn-dark">Editar</button> 
                     </router-link>
-                    <!-- <button type="button" class="btn btn-dark" @click="editarMovie">Editar</button> -->
-                    <button type="button" class="btn btn-dark" v-on:click="deleteMovie">Eliminar</button>
+                    <button type="button" class="btn btn-dark" v-on:click="deleteMovie(m.id_movie)">Eliminar</button>
                 </div>
             </div>
         
@@ -128,9 +127,9 @@ export default {
     
   methods:{
     
-    deleteMovie: function() {
+    deleteMovie(id_movie){
 
-      const response = this.axios.delete('http://127.0.0.1:5000/movie/' + localStorage.getItem('id_user') + '/' + 1, { headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`} })
+      const response = this.axios.delete('http://127.0.0.1:5000/movie/' + localStorage.getItem('id_user') + '/' + id_movie , { headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`} })
       try{ console.log(response)
       console.log("Pelicula eliminada")
       }catch(error) {
